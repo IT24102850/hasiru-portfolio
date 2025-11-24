@@ -73,4 +73,6 @@ export const iconMap = {
   github: GitHubIcon,
   email: MailIcon,
   location: LocationIcon,
-};
+} as const;
+
+export type IconKey = keyof typeof iconMap;
