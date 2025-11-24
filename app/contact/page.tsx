@@ -4,15 +4,43 @@ import { FormEvent, useState } from "react";
 import SiteFooter from "../../components/site-footer";
 import SiteHeader from "../../components/site-header";
 import content from "../../data/content";
-import { iconMap } from "../../components/social-icons";
+import {
+  WhatsAppIcon,
+  FacebookIcon,
+  LinkedInIcon,
+  InstagramIcon,
+  GitHubIcon,
+  MailIcon,
+  LocationIcon,
+} from "../../components/social-icons";
 
-const contactChannels = [
+const iconMap = {
+  whatsapp: WhatsAppIcon,
+  facebook: FacebookIcon,
+  linkedin: LinkedInIcon,
+  instagram: InstagramIcon,
+  github: GitHubIcon,
+  email: MailIcon,
+  location: LocationIcon,
+} as const;
+
+type IconKey = keyof typeof iconMap;
+
+type ContactChannel = {
+  label: string;
+  value?: string;
+  href?: string;
+  description?: string;
+  icon?: IconKey;
+};
+
+const contactChannels: ContactChannel[] = [
   {
     label: "Email",
     value: content.email,
     href: `mailto:${content.email}`,
     description: "Best for detailed project discussions and collaborations.",
-    icon: "email" as const,
+    icon: "email",
   },
   {
     label: "WhatsApp",
@@ -26,7 +54,7 @@ const contactChannels = [
     value: content.location,
     href: undefined,
     description: "Working remotely with teams across the globe.",
-    icon: "location" as const,
+    icon: "location",
   },
   {
     label: "LinkedIn",
